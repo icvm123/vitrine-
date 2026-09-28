@@ -1,0 +1,29 @@
+.rodape {
+  background-color: #20235b;
+  color: white;
+  padding: 30px 20px;
+  margin-top: 40px;
+}
+
+.rodape-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.rodape-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+}
+
+.rodape-avisos {
+  text-align: right;
+  color: #ccc;
+}

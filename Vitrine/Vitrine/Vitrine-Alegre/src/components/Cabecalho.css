@@ -1,0 +1,17 @@
+.cabecalho { background-color: #20235b; color: white; padding: 15px 0; }
+.cabecalho-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+.logo-container { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; }
+.logo-icon { background-color: #a3d74c; color: #20235b; width: 32px; height: 32px; display: flex; justify-content: center; align-items: center; border-radius: 6px; font-weight: bold; }
+.acoes-usuario { display: flex; align-items: center; gap: 20px; }
+.link-entrar { color: white; font-size: 0.9rem; }
+.btn-menu-mobile { display: none; background: none; border: none; color: white; font-size: 1.5rem; margin-right: 15px; cursor: pointer; }
+.grupo-logo-menu { display: flex; align-items: center; }
+
+@media (max-width: 768px) {
+  .cabecalho-container { flex-wrap: wrap; padding: 10px 15px; }
+  .btn-menu-mobile { display: block; }
+  .logo-text { font-size: 1rem; }
+  .link-entrar { display: none; }
+  .busca-container { order: 3; width: 100%; margin-top: 15px; }
+  .campo-busca { min-width: 100%; }
+}

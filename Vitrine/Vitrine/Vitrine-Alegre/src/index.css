@@ -1,0 +1,32 @@
+:root {
+  --cor-primaria: #20235b; /* Azul escuro do cabeçalho/rodapé */
+  --cor-secundaria: #a3d74c; /* Verde do botão/logo */
+  --cor-fundo: #f4f5f7; /* Fundo cinza claro */
+  --cor-texto: #333333;
+  --cor-texto-secundario: #666666;
+  --cor-borda: #e0e0e0;
+  --cor-desconto: #d32f2f;
+  --fonte-principal: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fonte-principal);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--fonte-principal);
+}

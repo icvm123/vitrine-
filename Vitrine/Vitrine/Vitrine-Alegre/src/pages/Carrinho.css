@@ -1,0 +1,57 @@
+.pagina-carrinho { padding: 10px 0; }
+.carrinho-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 25px; }
+.titulo-pagina { color: #20235b; font-size: 2rem; display: inline-block; margin-right: 15px; }
+.subtitulo-carrinho { color: #666; font-size: 1rem; }
+.link-continuar { color: #20235b; font-weight: 600; text-decoration: none; }
+.link-continuar:hover { text-decoration: underline; }
+.carrinho-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: start; }
+.lista-carrinho { background: white; border-radius: 12px; padding: 0 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.item-carrinho { display: grid; grid-template-columns: 80px 1fr auto auto auto; gap: 20px; align-items: center; padding: 30px 0; border-bottom: 1px solid #f0f0f0; }
+.item-carrinho:last-child { border-bottom: none; }
+.item-imagem { background: #f9f9f9; border: 1px solid #eaeaea; border-radius: 8px; width: 80px; height: 80px; display: flex; justify-content: center; align-items: center; padding: 5px; }
+.item-imagem img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.item-info { display: flex; flex-direction: column; }
+.item-categoria { font-size: 0.7rem; color: #888; margin-bottom: 4px; }
+.item-titulo-link { text-decoration: none; }
+.item-titulo { color: #20235b; font-size: 1.1rem; margin-bottom: 8px; }
+.item-preco-unitario { color: #666; font-size: 0.85rem; }
+.item-subtotal { color: #20235b; font-weight: bold; font-size: 1.1rem; width: 100px; text-align: right; }
+.btn-remover { background: none; border: none; color: #999; font-size: 1.5rem; cursor: pointer; padding: 0 10px; }
+.btn-remover:hover { color: #d32f2f; }
+.resumo-pedido { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.resumo-pedido h2 { color: #20235b; font-size: 1.2rem; margin-bottom: 25px; }
+.linha-resumo { display: flex; justify-content: space-between; color: #555; margin-bottom: 15px; font-size: 0.95rem; }
+.linha-resumo.descontos { color: #2e7d32; font-weight: 500; }
+.linha-resumo.frete { color: #2e7d32; font-weight: bold; }
+.divisor { border: none; border-top: 1px solid #eee; margin: 20px 0; }
+.linha-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.linha-total > span { font-weight: bold; font-size: 1.1rem; color: #20235b; }
+.valores-total { text-align: right; }
+.valor-final { display: block; font-size: 1.8rem; font-weight: bold; color: #20235b; }
+.parcelamento-final { font-size: 0.8rem; color: #666; }
+.btn-finalizar { width: 100%; background-color: #a3d74c; color: #1a1a1a; border: none; border-radius: 6px; padding: 15px; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
+.btn-finalizar:hover { background-color: #92c544; }
+
+/* Carrinho Vazio */
+.carrinho-vazio { padding: 10px 0; }
+.vazio-container { background: white; border-radius: 12px; padding: 60px 20px; text-align: center; margin-top: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.icone-carrinho-vazio { font-size: 4rem; color: #ccc; margin-bottom: 20px; }
+.vazio-container h2 { color: #20235b; margin-bottom: 10px; }
+.vazio-container p { color: #666; margin-bottom: 30px; }
+.btn-ir-vitrine { background-color: #a3d74c; color: #1a1a1a; border: none; border-radius: 6px; padding: 12px 30px; font-weight: bold; font-size: 1rem; cursor: pointer; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .carrinho-layout { grid-template-columns: 1fr; padding-bottom: 120px; }
+  .lista-carrinho { padding: 0 15px; }
+  .item-carrinho { grid-template-columns: 80px 1fr auto; grid-template-areas: "img info remove" "img qtde subtotal"; padding: 15px 0; gap: 10px; }
+  .item-imagem { grid-area: img; }
+  .item-info { grid-area: info; }
+  .btn-remover { grid-area: remove; text-align: right; }
+  .seletor-quantidade { grid-area: qtde; width: fit-content; }
+  .item-subtotal { grid-area: subtotal; text-align: right; width: auto; }
+  
+  .resumo-pedido { position: fixed; bottom: 0; left: 0; right: 0; border-radius: 20px 20px 0 0; padding: 15px 20px; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); z-index: 100; margin: 0; }
+  .resumo-pedido h2, .linha-resumo, .divisor { display: none; }
+  .linha-total { margin-bottom: 15px; }
+}

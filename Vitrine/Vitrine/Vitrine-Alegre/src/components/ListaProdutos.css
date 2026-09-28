@@ -1,0 +1,14 @@
+.lista-produtos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas como no mockup desktop */
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Responsividade básica (Mockup 05) */
+@media (max-width: 900px) {
+  .lista-produtos { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .lista-produtos { grid-template-columns: 1fr; } /* 1 coluna mobile */
+}
