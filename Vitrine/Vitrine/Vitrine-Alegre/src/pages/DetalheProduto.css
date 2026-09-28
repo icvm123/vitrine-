@@ -1,125 +1,206 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import './DetalheProduto.css'; 
+/* Estilos para a página de detalhes do produto */
 
-export default function DetalheProduto({ onAddToCart }) {
-  const { id } = useParams();
-  const [produto, setProduto] = useState(null);
-  const [carregando, setCarregando] = useState(true);
-  const [imagemAtiva, setImagemAtiva] = useState('');
+.retencias {
+  color: #888;
+}
 
-  useEffect(() => {
-    setCarregando(true);
-    fetch(`https://dummyjson.com/products/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setProduto(data);
-        setImagemAtiva(data.thumbnail); 
-        setCarregando(false);
-      })
-      .catch(err => {
-        console.error("Erro ao buscar produto:", err);
-        setCarregando(false);
-      });
-  }, [id]);
+.pagina-detalhe {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
 
-  if (carregando) return <div className="estado-carregando">A carregar detalhes do produto...</div>;
-  if (!produto) return <div className="estado-erro">Produto não encontrado.</div>;
+.breadcrumbs {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #666;
+}
 
-  const precoOriginal = (produto.price / (1 - produto.discountPercentage / 100)).toFixed(2);
-  const economia = (precoOriginal - produto.price).toFixed(2);
-  const parcela = (produto.price / 12).toFixed(2);
+.breadcrumbs a {
+  color: #007bff;
+  text-decoration: none;
+}
 
-  return (
-    <div className="pagina-detalhe">
-      <nav className="breadcrumbs">
-        <Link to="/">Início</Link> &rsaquo; <span>{produto.category}</span> &rsaquo; <strong>{produto.title}</strong>
-      </nav>
+.detalhe-container {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
 
-      <div className="detalhe-container principal">
-        <div className="galeria-imagens">
-          <div className="imagem-principal-container">
-            <img src={imagemAtiva} alt={produto.title} className="imagem-principal" />
-          </div>
-          <div className="lista-miniaturas">
-            {produto.images && produto.images.slice(0, 4).map((img, index) => (
-              <img 
-                key={index} 
-                src={img} 
-                alt={`Miniatura ${index + 1}`} 
-                className={`miniatura ${imagemAtiva === img ? 'ativa' : ''}`}
-                onClick={() => setImagemAtiva(img)}
-              />
-            ))}
-          </div>
-        </div>
+.galeria-imagens {
+  flex: 1;
+}
 
-        <div className="info-compra">
-          <span className="categoria-texto">{produto.category.toUpperCase()}</span>
-          <h1 className="titulo-produto">{produto.title}</h1>
-          <p className="meta-info">Marca: {produto.brand || 'Genérica'} · SKU: {produto.sku}</p>
-          
-          <div className="avaliacao-detalhe">
-            <span className="estrelas">★★★★☆</span>
-            <span>{produto.rating} · {produto.reviews?.length || 0} avaliações</span>
-          </div>
+.imagem-principal {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 8px;
+}
 
-          <div className="caixa-preco">
-            <p className="preco-antigo">R$ {precoOriginal} <span className="economia">economize R$ {economia}</span></p>
-            <div className="preco-atual-container">
-              <h2 className="preco-atual">R$ {produto.price.toFixed(2)}</h2>
-              <span className="badge-desconto">-{Math.round(produto.discountPercentage)}%</span>
-            </div>
-            <p className="parcelamento">em até 12x de R$ {parcela} sem juros</p>
-          </div>
+.lista-miniaturas {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
 
-          <p className={`estoque ${produto.stock > 0 ? 'em-estoque' : 'sem-estoque'}`}>
-            ● {produto.stock} em estoque
-          </p>
+.miniatura {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
-          <div className="acoes-compra">
-            <div className="seletor-quantidade">
-              <button>-</button>
-              <input type="text" value="1" readOnly />
-              <button>+</button>
-            </div>
-            <button className="btn-adicionar-grande" onClick={() => onAddToCart(produto)}>
-              Adicionar ao carrinho
-            </button>
-          </div>
+.miniatura.ativa {
+  border-color: #007bff;
+}
 
-          <div className="beneficios">
-            <div className="beneficio-card">
-              <small>ENVIO</small>
-              <p>{produto.shippingInformation}</p>
-            </div>
-            <div className="beneficio-card">
-              <small>GARANTIA</small>
-              <p>{produto.warrantyInformation}</p>
-            </div>
-            <div className="beneficio-card">
-              <small>DEVOLUÇÃO</small>
-              <p>{produto.returnPolicy}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+.info-compra {
+  flex: 1;
+}
 
-      <div className="detalhe-container grid-inferior">
-        <div className="secao-detalhe">
-          <h3>Descrição</h3>
-          <p>{produto.description}</p>
-        </div>
+.categoria-texto {
+  font-size: 12px;
+  color: #888;
+  font-weight: bold;
+}
 
-        <div className="secao-detalhe">
-          <h3>Especificações</h3>
-          <ul className="lista-especificacoes">
-            <li><span>Peso</span> <strong>{produto.weight} kg</strong></li>
-            <li><span>Estoque</span> <strong>{produto.stock} unidades</strong></li>
-            <li><span>Pedido mínimo</span> <strong>{produto.minimumOrderQuantity} unidades</strong></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
+.titulo-produto {
+  font-size: 24px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.meta-info {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.caixa-preco {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+
+.preco-antigo {
+  font-size: 14px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.economia {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.preco-atual-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0;
+}
+
+.preco-atual {
+  font-size: 28px;
+  color: #333;
+}
+
+.badge-desconto {
+  background: #28a745;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.parcelamento {
+  font-size: 13px;
+  color: #666;
+}
+
+.estoque {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.em-estoque {
+  color: #28a745;
+}
+
+.sem-estoque {
+  color: #dc3545;
+}
+
+.acoes-compra {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.btn-adicionar-grande {
+  flex: 1;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-adicionar-grande:hover {
+  background: #0056b3;
+}
+
+.beneficios {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.beneficio-card {
+  font-size: 13px;
+  color: #555;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+}
+
+.beneficio-card small {
+  font-weight: bold;
+  color: #333;
+}
+
+.grid-inferior {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.secao-detalhe {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.lista-especificacoes {
+  list-style: none;
+  padding: 0;
+}
+
+.lista-especificacoes li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 14px;
 }
